@@ -1,0 +1,23 @@
+Failure Count = CALCULATE(COUNTROWS('Wind_turbine'), 'Wind_turbine'[Failure_status] = "Failure")
+
+
+Failure_Rate = DIVIDE([Failure Count], [Record Count])*100
+
+
+Max_Rotor_speed = MAX([Rotor_Speed])
+
+
+Month = MONTH([date])
+
+
+Record Count = COUNTROWS('Wind_turbine')
+
+
+Season = 
+SWITCH(
+    TRUE(),
+    'Wind_turbine'[Month] IN {12, 1, 2}, "Winter",
+    'Wind_turbine'[Month] IN {3, 4, 5}, "Spring",
+    'Wind_turbine'[Month] IN {6, 7, 8}, "Summer",
+    'Wind_turbine'[Month] IN {9, 10, 11}, "Autumn"
+)
